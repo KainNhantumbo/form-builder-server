@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
-import User from '../models/User';
+import User from '../entities/User';
 
 dotenv.config(); // imports env variables
 
@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   port: Number(process.env.DATABASE_PORT),
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
+  database: process.env.DATABASE,
   synchronize: true,
   logging: false,
   entities: [User],

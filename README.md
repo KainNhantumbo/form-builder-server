@@ -1,4 +1,4 @@
-# Formhuby API (Node.JS, Typescript, PostgresSQL and Docker)
+# Formhuby API (Node.JS, Typescript, PostgreSQL and Docker)
 
 This REST API server application is built to serve its endpoints to Formhuby application ([see the source code here](https://github.com/KainNhantumbo/form-builder-app)), which is currently under active development.
 
@@ -15,10 +15,10 @@ This project is under active development, it means that new features a being bac
 - **Node.JS** - Javascript runtime.
 - **Typescript** - a superset language of Javascript that provides typechecking.
 - **Docker** - for application containerization and ease deployment.
-- **PostgresSQL** - database for storing data.
+- **PostgreSQL** - database for storing data.
 - **Express.js** - a small unpinionated framework for building server apps with Node.js
 - **Jest and Supertest** - for testing.
-- **TypeORM** - an ORM for conneting application to PostgresSQL.
+- **TypeORM** - an ORM for conneting application to PostgreSQL.
 - **Swagger Docs** - for API documentation.
 
 <!-- ## Current features

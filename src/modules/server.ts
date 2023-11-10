@@ -3,6 +3,7 @@ import { info } from 'node:console';
 import { DataSource } from 'typeorm';
 import terminus from '@godaddy/terminus';
 import type { AppProps } from '../types';
+import EventLogger from '../lib/event-logger';
 import Database, { AppDataSource } from '../config/data-source';
 
 export default class CreateServer {
@@ -18,7 +19,8 @@ export default class CreateServer {
     try {
       this.database = await Database.connect();
       this.props.app.listen(this.props.port, () => {
-        info(`Server running... Port: ${this.props.port}`);
+        EventLogger.info('Connected to Database.');
+        EventLogger.info(`Server Online: ${this.props.port}`);
       });
       this.shutdown();
     } catch (error) {
