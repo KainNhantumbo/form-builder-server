@@ -1,1 +1,1 @@
-console.info('running')
+import 'reflect-metadata';
