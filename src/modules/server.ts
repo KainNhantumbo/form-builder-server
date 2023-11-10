@@ -1,13 +1,13 @@
 import { debug } from 'node:util';
 import { info } from 'node:console';
+import { DataSource } from 'typeorm';
 import terminus from '@godaddy/terminus';
 import type { AppProps } from '../types';
-import Database from '../config/data-source';
-import { DataSource } from 'typeorm';
+import Database, { AppDataSource } from '../config/data-source';
 
 export default class CreateServer {
   private readonly props: AppProps;
-  private database: DataSource;
+  private database: DataSource = AppDataSource;
 
   constructor(props: AppProps) {
     this.props = props;

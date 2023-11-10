@@ -4,7 +4,7 @@ import User from '../models/User';
 
 dotenv.config(); // imports env variables
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DATABASE_HOST,
   port: Number(process.env.DATABASE_PORT),
