@@ -6,6 +6,8 @@ import swaggerUI from 'swagger-ui-express';
 import EventLogger from '../lib/event-logger';
 import { sequelize } from '../config/data-source';
 import { AppProps, IReq, IRes } from '../types';
+import ErrorHandler from '../lib/error-handler';
+import { _404Route } from '../routes/404';
 
 export default class CreateServer {
   private readonly props: AppProps;
@@ -21,9 +23,10 @@ export default class CreateServer {
       this.props.app.listen(this.props.port, () => {
         EventLogger.info('Connected to Database.');
         EventLogger.info(`Server Online: ${this.props.port}`);
-        this.serveDocs()
+        this.serveDocs();
 
-
+        this.props.app.use(_404Route);
+        this.props.app.use(ErrorHandler.handler);
       });
       this.shutdown();
     } catch (error) {

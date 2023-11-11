@@ -1,8 +1,3 @@
-import {
-  DataTypeNotSupportedError,
-  ErrorDescription,
-  WriteError
-} from 'typeorm';
 import AppError from './app-error';
 import EventLogger from './event-logger';
 import { IReq, IRes, INext } from '../types';
@@ -55,23 +50,14 @@ export default class ErrorHandler {
       });
     }
 
-    if (error instanceof WriteError) {
-      const errorMessage = (error as ErrorDescription).message || error.message;
-      return res.status(400).json({
-        status: 'Data Validation Error',
-        code: 400,
-        message: errorMessage
-      });
-    }
-
-    if (error instanceof DataTypeNotSupportedError) {
-      const errorMessage = (error as ErrorDescription).message || error.message;
-      return res.status(400).json({
-        status: 'Data Validation Error',
-        code: 400,
-        message: errorMessage
-      });
-    }
+    // if (error instanceof WriteError) {
+    //   const errorMessage = (error as ErrorDescription).message || error.message;
+    //   return res.status(400).json({
+    //     status: 'Data Validation Error',
+    //     code: 400,
+    //     message: errorMessage
+    //   });
+    // }
 
     if (error.name === 'CastError') {
       return res.status(400).json({
