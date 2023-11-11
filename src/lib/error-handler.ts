@@ -2,6 +2,7 @@ import AppError from './app-error';
 import EventLogger from './event-logger';
 import { IReq, IRes, INext } from '../types';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import { ZodError } from 'zod';
 
 /**
  * Global error handler middleware.
@@ -58,6 +59,15 @@ export default class ErrorHandler {
     //     message: errorMessage
     //   });
     // }
+    
+    if (error instanceof ZodError) {
+      const errorMessage = (error as ZodError).errors.join(' ') || error.message;
+      return res.status(400).json({
+        status: 'Data Validation Error',
+        code: 400,
+        message: errorMessage
+      });
+    }
 
     if (error.name === 'CastError') {
       return res.status(400).json({

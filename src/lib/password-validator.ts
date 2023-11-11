@@ -1,14 +1,5 @@
 import PasswordValidator from 'password-validator';
 
-export function validateEmail(data: string): boolean {
-  const regex: RegExp = new RegExp(
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-  const result: RegExpExecArray | null = regex.exec(String(data));
-  if (!result) return false;
-  return true;
-}
-
 export async function validatePassword(data: string) {
   return await new Promise((resolve) => {
     const schema = new PasswordValidator()
