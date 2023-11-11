@@ -7,7 +7,7 @@ import EventLogger from '../lib/event-logger';
 import { sequelize } from '../config/data-source';
 import { AppProps, IReq, IRes } from '../types';
 import ErrorHandler from '../lib/error-handler';
-import { _404Route } from '../routes/404';
+import { _404Route } from '../routes/error-404.routes';
 
 export default class CreateServer {
   private readonly props: AppProps;
