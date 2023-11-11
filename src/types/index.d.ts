@@ -9,6 +9,6 @@ export type HandledFunction = (
   req: Request,
   res: Response,
   next: NextFunction
-) => Promise<Response<void>>;
+) => Promise<unknown>;
 
 export type { Response as IRes, Request as IReq, NextFunction as INext };

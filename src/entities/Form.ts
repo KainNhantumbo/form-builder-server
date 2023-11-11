@@ -10,7 +10,7 @@ import {
   OneToMany
 } from 'typeorm';
 import User from '@/entities/User';
-import FormSubmission from './FormSubmission';
+import FormSubmission from '@/entities/FormSubmission';
 
 @Entity({ name: 'form' })
 export default class Form extends BaseEntity {
