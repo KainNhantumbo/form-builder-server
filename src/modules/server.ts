@@ -1,14 +1,12 @@
+import { AppProps } from '../types';
 import { debug } from 'node:util';
 import { info } from 'node:console';
-import { DataSource } from 'typeorm';
 import terminus from '@godaddy/terminus';
-import type { AppProps } from '../types';
 import EventLogger from '../lib/event-logger';
-import Database, { AppDataSource } from '../config/data-source';
+import { sequelize } from '../config/data-source';
 
 export default class CreateServer {
   private readonly props: AppProps;
-  private database: DataSource = AppDataSource;
 
   constructor(props: AppProps) {
     this.props = props;
@@ -17,7 +15,7 @@ export default class CreateServer {
 
   private async start() {
     try {
-      this.database = await Database.connect();
+      await sequelize.authenticate();
       this.props.app.listen(this.props.port, () => {
         EventLogger.info('Connected to Database.');
         EventLogger.info(`Server Online: ${this.props.port}`);
@@ -30,11 +28,10 @@ export default class CreateServer {
   }
 
   private shutdown() {
-    const databaseInstance = this.database;
     return terminus.createTerminus(this.props.app, {
       onSignal: async function () {
         try {
-          await databaseInstance.destroy();
+          await sequelize.close();
         } catch (error) {
           console.error(error);
         }

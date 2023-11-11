@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import { format} from 'node:util';
 import { existsSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { appendFile, mkdir } from 'node:fs/promises';
@@ -33,6 +34,6 @@ export default class EventLogger {
   }
 
   static info(message: string) {
-    console.info(`[${new Date().toLocaleDateString()}]\t\t`, message);
+    console.debug(`[${format(new Date().toISOString())}]`, message);
   }
 }

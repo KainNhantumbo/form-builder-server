@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 import AppError from '../lib/app-error';
-import User from '../entities/User';
+import User from '../models/User';
 import { Request as IReq, Response as IRes } from 'express';
 import { verifyToken, createToken } from '../lib/jwt-async-functions';
 
