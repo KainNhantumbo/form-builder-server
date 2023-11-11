@@ -4,8 +4,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+import Form from '@/entities/Form';
 
 @Entity({ name: 'user' })
 export default class User extends BaseEntity {
@@ -24,9 +26,11 @@ export default class User extends BaseEntity {
   @Column({ type: 'text' })
   password!: string;
 
-  
   @Column({ type: 'date' })
   last_session!: Date;
+
+  @OneToMany(() => Form, (form) => form.user_id)
+  forms!: Form[];
 
   @CreateDateColumn({ type: 'date' })
   created_at!: Date;

@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import User from '../entities/User';
 import Form from '../entities/Form'
+import FormSubmission from '../entities/FormSubmission'
 
 dotenv.config(); // imports env variables
 
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DATABASE,
   synchronize: true,
   logging: false,
-  entities: [User, Form],
+  entities: [User, Form, FormSubmission],
   subscribers: [],
   migrations: []
 });

@@ -1,19 +1,25 @@
 import {
+  JoinColumn,
   BaseEntity,
+  ManyToOne,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+import User from '@/entities/User';
+import FormSubmission from './FormSubmission';
 
 @Entity({ name: 'form' })
 export default class Form extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  user_id!: string;
+  @ManyToOne(() => User, (user) => user.forms)
+  @JoinColumn({ name: 'user_id' })
+  user_id!: User;
 
   @Column({ length: 64, unique: true })
   name!: string;
@@ -27,8 +33,8 @@ export default class Form extends BaseEntity {
   @Column({ type: 'integer', default: 0 })
   visits!: number;
 
-  @Column({ type: 'integer', default: 0 })
-  submissions!: number;
+  @OneToMany(() => FormSubmission, (formSubmission) => formSubmission.form_id)
+  submissions!: FormSubmission[];
 
   @Column({ type: 'boolean', default: false })
   published!: boolean;
