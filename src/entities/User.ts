@@ -24,6 +24,7 @@ export default class User extends BaseEntity {
   @Column({ type: 'text' })
   password!: string;
 
+  
   @Column({ type: 'date' })
   last_session!: Date;
 
