@@ -1,9 +1,11 @@
-import { AppProps } from '../types';
 import { debug } from 'node:util';
 import { info } from 'node:console';
 import terminus from '@godaddy/terminus';
+import swaggerSpec from '../swagger.json';
+import swaggerUI from 'swagger-ui-express';
 import EventLogger from '../lib/event-logger';
 import { sequelize } from '../config/data-source';
+import { AppProps, IReq, IRes } from '../types';
 
 export default class CreateServer {
   private readonly props: AppProps;
@@ -19,6 +21,9 @@ export default class CreateServer {
       this.props.app.listen(this.props.port, () => {
         EventLogger.info('Connected to Database.');
         EventLogger.info(`Server Online: ${this.props.port}`);
+        this.serveDocs()
+
+
       });
       this.shutdown();
     } catch (error) {
@@ -45,5 +50,18 @@ export default class CreateServer {
       timeout: 15000,
       signals: ['SIGINT', 'SIGTERM']
     });
+  }
+
+  private serveDocs() {
+    this.props.app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+
+    this.props.app.get('/docs-json', (req: IReq, res: IRes) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(swaggerSpec);
+    });
+
+    EventLogger.info(
+      `API Documentation: http://localhost:${this.props.port}/docs`
+    );
   }
 }

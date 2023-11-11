@@ -1,0 +1,79 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Formhuby API",
+    "description": "Formhuby Server Rest API Application",
+    "version": "1.1.0",
+    "contact": {
+      "name": "Kain Nhantumbo",
+      "url": "codenut-dev.vercel.app",
+      "email": "nhantumbok@gmail.com"
+    },
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "http://www.apache.org/licenses"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Development server"
+    },
+    {
+      "url": "https://formhuby-api-demo.onrender.com",
+      "description": "Production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "first_name": { "type": "string", "required": true },
+          "last_name": { "type": "string", "required": true },
+          "email": { "type": "string", "required": true },
+          "password": { "type": "string", "required": true }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/healthcheck": {
+      "get": {
+        "tags": ["healthcheck"],
+        "summary": "Get API status",
+        "description": "Performs a handshake/healthcheck to the server",
+        "responses": {
+          "200": {
+            "description": "Request succeded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "int32" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
