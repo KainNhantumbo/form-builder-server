@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 import User from '../models/User';
 import AppError from '../lib/app-error';
-// import { validatePassword } from '../lib/validators';
+import { validatePasswords } from '../lib/password-validator';
 import { Request as IReq, Response as IRes } from 'express';
 
 dotenv.config(); // imports env variables

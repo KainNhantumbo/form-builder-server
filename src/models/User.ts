@@ -53,4 +53,8 @@ User.hasMany(Form, {
   onDelete: 'CASCADE'
 });
 
+// User.beforeCreate('hash', function(instance) {
+// instance.
+// })
+
 export default User;
