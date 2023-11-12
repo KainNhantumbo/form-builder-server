@@ -12,3 +12,10 @@ export type HandledFunction = (
 ) => Promise<unknown>;
 
 export type { Response as IRes, Request as IReq, NextFunction as INext };
+
+
+export type QueryOptions = {
+  sort: Array<string, "DESC"| "ASC">,
+  limit: number | undefined,
+  offset: number | undefined 
+}
