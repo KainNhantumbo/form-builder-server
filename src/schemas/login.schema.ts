@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { validatePassword } from '../lib/password-validator';
+import { validatePassword } from '../lib/password-utils';
 
 export const LoginSchema = z.object({
   body: z
