@@ -1,8 +1,7 @@
 import { Op } from 'sequelize';
-import { z } from 'zod';
 import { sequelize } from '../config/data-source';
 import AppError from '../lib/app-error';
-import Form from '../models/Form';
+import Form from '../models/form.model';
 import { IReq, IRes, QueryOptions } from '../types';
 
 export default class FormController {

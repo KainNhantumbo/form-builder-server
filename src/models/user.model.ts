@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
-import Form from './Form';
+import Form from './form.model';
 
 export interface IUser {
   id: number;

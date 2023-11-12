@@ -1,22 +1,26 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
-import Form from './Form';
+import Form from './form.model';
 
-const FormSubmission = sequelize.define('FormSubmissions', {
+const Submission = sequelize.define('FormSubmissions', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  form_id: {
+  form: {
     type: DataTypes.INTEGER,
     references: {
       key: 'id',
       model: Form
     }
+  },
+  contents: {
+    type: DataTypes.ARRAY,
+    allowNull: false
   }
 });
 
-FormSubmission.belongsTo(Form);
+Submission.belongsTo(Form);
 
-export default FormSubmission;
+export default Submission;

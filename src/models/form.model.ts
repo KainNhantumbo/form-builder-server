@@ -1,7 +1,7 @@
+import User from './user.model';
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
-import FormSubmission from './FormSubmission';
-import User from './User';
+import Submission from './submission.model';
 
 const Form = sequelize.define('Forms', {
   id: {
@@ -61,8 +61,8 @@ const Form = sequelize.define('Forms', {
 
 Form.belongsTo(User);
 
-Form.hasMany(FormSubmission, {
-  foreignKey: 'form_submission_id'
+Form.hasMany(Submission, {
+  foreignKey: 'submission_id'
 });
 
 export default Form;

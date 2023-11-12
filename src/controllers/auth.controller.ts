@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import AppError from '../lib/app-error';
-import User, { IUser } from '../models/User';
+import User, { IUser } from '../models/user.model';
 import { Request as IReq, Response as IRes } from 'express';
 import { verifyToken, createToken } from '../lib/jwt-async-functions';
 import { sequelize } from '../config/data-source';
@@ -78,12 +78,12 @@ export default class AuthController {
 
     if (!decodedPayload) throw new AppError('Access denied: forbidden.', 403);
 
-    const user = await sequelize.transaction(async (t) => {
+    const user = (await sequelize.transaction(async (t) => {
       return await User.findOne({
         where: { id: decodedPayload.id },
         transaction: t
       });
-    }) as unknown as IUser | null
+    })) as unknown as IUser | null;
 
     if (!user) throw new AppError('Access denied: invalid credentials', 401);
 
