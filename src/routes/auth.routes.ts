@@ -8,7 +8,11 @@ const controller = new AuthController();
 const validator = new Validator();
 
 router.get('/refresh', asyncWrapper(controller.refresh));
-router.post('/login', validator.login, asyncWrapper(controller.login));
+router.post(
+  '/login',
+  asyncWrapper(validator.login),
+  asyncWrapper(controller.login)
+);
 router.post('/logout', asyncWrapper(controller.logout));
 
 export { router as _AuthRoutes };
