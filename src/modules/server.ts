@@ -1,13 +1,13 @@
-import { debug } from 'node:util';
-import { info } from 'node:console';
 import terminus from '@godaddy/terminus';
+import { info } from 'node:console';
+import { debug } from 'node:util';
 import swaggerUI from 'swagger-ui-express';
-import EventLogger from '../lib/event-logger';
-import swaggerSpec from '../docs/swagger.json';
-import { AppProps, IReq, IRes } from '../types';
-import ErrorHandler from '../lib/error-handler';
 import { sequelize } from '../config/data-source';
+import swaggerSpec from '../docs/swagger.json';
+import ErrorHandler from '../lib/error-handler';
+import EventLogger from '../lib/event-logger';
 import { _404Route } from '../routes/error-404.routes';
+import { AppProps, IReq, IRes } from '../types';
 
 export default class CreateServer {
   private readonly props: AppProps;

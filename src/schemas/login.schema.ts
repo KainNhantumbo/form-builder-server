@@ -14,5 +14,3 @@ export const LoginSchema = z.object({
       path: ['password']
     })
 });
-
-export type LoginSchemaType = z.infer<typeof LoginSchema>;
