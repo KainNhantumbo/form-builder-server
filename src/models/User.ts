@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
-import * as bcrypt from 'bcrypt';
+import Form from './Form';
 
 const User = sequelize
   .define('Users', {
@@ -8,8 +8,7 @@ const User = sequelize
       type: DataTypes.STRING({ length: 21 }),
       allowNull: false,
       validate: {
-        max: 21,
-        min: 2,
+        len: [2, 21],
         notEmpty: true
       }
     },
@@ -17,8 +16,7 @@ const User = sequelize
       type: DataTypes.STRING({ length: 21 }),
       allowNull: false,
       validate: {
-        max: 21,
-        min: 2,
+        len: [2, 21],
         notEmpty: true
       }
     },
@@ -45,7 +43,7 @@ const User = sequelize
       }
     }
   })
-  .hasMany('Form', {
+  .hasMany(Form, {
     foreignKey: 'form_id',
     onDelete: 'CASCADE'
   });
