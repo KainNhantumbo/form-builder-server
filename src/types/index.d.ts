@@ -13,9 +13,10 @@ export type HandledFunction = (
 
 export type { Response as IRes, Request as IReq, NextFunction as INext };
 
-
 export type QueryOptions = {
-  sort: Array<string, "DESC"| "ASC">,
-  limit: number | undefined,
-  offset: number | undefined 
-}
+  sort: Array<string, 'DESC' | 'ASC'>;
+  limit: number | undefined;
+  offset: number | undefined;
+};
+
+export type DecodedPayload = { id: string } | null | undefined;

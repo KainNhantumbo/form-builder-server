@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import { DecodedPayload } from '../types';
 
 /**
  * @param user_id user id string
@@ -26,8 +27,8 @@ export function createToken(
  * @returns Promise<unknown>
  */
 export function verifyToken(token: string, secret: string) {
-  return new Promise((resolve): void => {
-    const result = jwt.verify(token, secret);
+  return new Promise<DecodedPayload>((resolve): void => {
+    const result = jwt.verify(token, secret) as DecodedPayload
     resolve(result);
   });
 }

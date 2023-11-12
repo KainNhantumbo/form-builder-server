@@ -2,6 +2,17 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
 import Form from './Form';
 
+export interface IUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  password: string;
+  email: string;
+  updatedAt: string;
+  createdAt: string;
+  last_session: string;
+}
+
 const User = sequelize.define('Users', {
   id: {
     type: DataTypes.INTEGER,
@@ -52,9 +63,5 @@ User.hasMany(Form, {
   foreignKey: 'form_id',
   onDelete: 'CASCADE'
 });
-
-// User.beforeCreate('hash', function(instance) {
-// instance.
-// })
 
 export default User;

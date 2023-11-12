@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { validatePassword } from '../lib/password-utils';
+import { validatePasswords } from '../lib/password-utils';
 
 export const LoginSchema = z.object({
   body: z
@@ -9,7 +9,7 @@ export const LoginSchema = z.object({
         .string()
         .min(8, { message: 'Password must have at least 8 characters.' })
     })
-    .refine(async ({ password }) => await validatePassword(password), {
+    .refine(async ({ password }) => await validatePasswords(password), {
       message: 'Please check your password and try again.',
       path: ['password']
     })

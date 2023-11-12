@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv';
 import { Request as IReq, Response as IRes } from 'express';
+import { z } from 'zod';
 import { sequelize } from '../config/data-source';
 import AppError from '../lib/app-error';
 import { hashPassword, validatePasswords } from '../lib/password-utils';
 import User from '../models/User';
-import { z } from 'zod';
 
 dotenv.config(); // imports env variables
 
