@@ -11,4 +11,8 @@ router
   .get(authenticate, asyncWrapper(controller.getSubmisions))
   .post(asyncWrapper(controller.createSubmisions));
 
+router
+  .route('/:id')
+  .delete(authenticate, asyncWrapper(controller.deleteSubmisions));
+
 export { router as _SubmissionsRoutes };

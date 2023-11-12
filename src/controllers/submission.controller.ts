@@ -1,5 +1,4 @@
 import { IReq, IRes } from '../types';
-import AppError from '../lib/app-error';
 import { sequelize } from '../config/data-source';
 import Submission from '../models/submission.model';
 
@@ -34,5 +33,19 @@ export default class SubmissionController {
     });
 
     res.sendStatus(201);
+  }
+
+  async deleteSubmisions(req: IReq, res: IRes) {
+    const { id: submissionId } = req.params;
+
+    await sequelize.transaction(async (t) => {
+      await Submission.destroy({
+        where: { id: submissionId },
+        transaction: t,
+        cascade: true
+      });
+    });
+
+    res.sendStatus(204);
   }
 }

@@ -35,7 +35,7 @@ const Form = sequelize.define('Forms', {
     }
   },
   content: {
-    type: DataTypes.ARRAY(),
+    type: DataTypes.ARRAY(DataTypes.HSTORE),
     allowNull: false
   },
   visits: {
@@ -59,7 +59,7 @@ const Form = sequelize.define('Forms', {
   }
 });
 
-Form.belongsTo(User);
+// Form.belongsTo(User);
 
 Form.hasMany(Submission, {
   foreignKey: 'submission_id'

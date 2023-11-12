@@ -61,7 +61,6 @@ const User = sequelize.define('Users', {
 
 User.hasMany(Form, {
   foreignKey: 'form_id',
-  onDelete: 'CASCADE'
 });
 
 export default User;

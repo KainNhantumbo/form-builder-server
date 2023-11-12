@@ -32,7 +32,7 @@ export default class FormController {
       offset: undefined
     };
 
-    const query = { user_id: user.id };
+    const query: any = { user_id: user.id };
 
     if (search) {
       query[Op.or] = [

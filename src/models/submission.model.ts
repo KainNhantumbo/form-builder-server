@@ -1,8 +1,8 @@
+import Form from './form.model';
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/data-source';
-import Form from './form.model';
 
-const Submission = sequelize.define('FormSubmissions', {
+const Submission = sequelize.define('Submissions', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -16,11 +16,11 @@ const Submission = sequelize.define('FormSubmissions', {
     }
   },
   contents: {
-    type: DataTypes.ARRAY,
+    type: DataTypes.HSTORE,
     allowNull: false
   }
 });
 
-Submission.belongsTo(Form);
+// Submission.belongsTo(Form);
 
 export default Submission;
