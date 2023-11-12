@@ -9,7 +9,7 @@ import { comparePasswords } from '../lib/password-utils';
 dotenv.config(); // imports env variables
 
 export default class AuthController {
-  async defaultLogin(req: IReq, res: IRes) {
+  async login(req: IReq, res: IRes) {
     const PROD_ENV: boolean =
       process.env.NODE_ENV === 'development' ? false : true;
 
