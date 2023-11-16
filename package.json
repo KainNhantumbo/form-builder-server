@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "formhuby-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": {
@@ -22,15 +22,13 @@
     "rest api"
   ],
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "tsx --watch src/app.ts",
+    "start": "node dist/app.js",
+    "dev": "tsx watch src/app.ts",
     "test": "jest --detectOpenHandles",
     "build": "tsc",
-    "typecheck": "tsc",
     "typecheck:watch": "tsc -w"
   },
   "dependencies": {
-    "@godaddy/terminus": "^4.12.1",
     "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
@@ -58,7 +56,6 @@
     "@types/node": "^20.9.0",
     "@types/supertest": "^2.0.16",
     "@types/swagger-ui-express": "^4.1.6",
-    "@types/validator": "^13.11.6",
     "jest": "^29.7.0",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",

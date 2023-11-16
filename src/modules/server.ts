@@ -1,13 +1,10 @@
-import terminus from '@godaddy/terminus';
-import { info } from 'node:console';
-import { debug } from 'node:util';
 import swaggerUI from 'swagger-ui-express';
 import { sequelize } from '../config/data-source';
 import swaggerSpec from '../docs/swagger.json';
 import ErrorHandler from '../lib/error-handler';
 import EventLogger from '../lib/event-logger';
 import { _404Route } from '../routes/error-404.routes';
-import { AppProps, IReq, IRes } from '../types';
+import { AppProps, CurrentServer, IReq, IRes } from '../types';
 
 export default class CreateServer {
   private readonly props: AppProps;
@@ -20,7 +17,7 @@ export default class CreateServer {
   private async start() {
     try {
       await sequelize.authenticate();
-      this.props.app.listen(this.props.port, () => {
+      const serverInstance = this.props.app.listen(this.props.port, () => {
         EventLogger.info('Connected to Database.');
         EventLogger.info(`Server Online: ${this.props.port}`);
         this.serveDocs();
@@ -28,31 +25,30 @@ export default class CreateServer {
         this.props.app.use(_404Route);
         this.props.app.use(ErrorHandler.handler);
       });
-      this.shutdown();
+      this.shutdown(serverInstance);
     } catch (error) {
       console.error(error);
       process.exit(process.exitCode || 0);
     }
   }
 
-  private shutdown() {
-    return terminus.createTerminus(this.props.app, {
-      onSignal: async function () {
-        try {
-          await sequelize.close();
-        } catch (error) {
-          console.error(error);
-        }
-      },
-      beforeShutdown: async function () {
-        debug('Signal received: closing HTTP server.');
-      },
-      onShutdown: async function () {
-        info('Cleanup finished, server is shutting down.');
-      },
-      timeout: 15000,
-      signals: ['SIGINT', 'SIGTERM']
-    });
+  private async shutdown(server: CurrentServer) {
+    const signals = ['SIGINT', 'SIGTERM'];
+
+    try {
+      await sequelize.close();
+      for (const signal of signals) {
+        process.on(signal, () => {
+          EventLogger.info(`${signal} received: closing HTTP server.`);
+          server.close(() => {
+            EventLogger.info('Cleanup finished, server is shutting down.');
+          });
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      process.exit(process.exitCode || 1);
+    }
   }
 
   private serveDocs() {

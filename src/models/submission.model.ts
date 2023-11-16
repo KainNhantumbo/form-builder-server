@@ -21,6 +21,4 @@ const Submission = sequelize.define('Submissions', {
   }
 });
 
-// Submission.belongsTo(Form);
-
 export default Submission;

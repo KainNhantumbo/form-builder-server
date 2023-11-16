@@ -1,5 +1,10 @@
-import { Application } from 'express';
-import { Response, Request, NextFunction } from 'express';
+import { Server, IncomingMessage, ServerResponse } from 'node:http';
+import { Application, Response, Request, NextFunction } from 'express';
+
+export type CurrentServer = Server<
+  typeof IncomingMessage,
+  typeof ServerResponse
+>;
 
 export type AppProps = { app: Application; port: number };
 
@@ -14,7 +19,7 @@ export type HandledFunction = (
 export type { Response as IRes, Request as IReq, NextFunction as INext };
 
 export type QueryOptions = {
-  sort: Array<string, 'DESC' | 'ASC'>;
+  sort: Array<string>;
   limit: number | undefined;
   offset: number | undefined;
 };
